@@ -4,7 +4,7 @@ LJMP MAIN
 ORG 000BH
 LJMP INTERRUPT
 
-; PWM Variables - TH M M?I
+; PWM Variables - TH√äM M?I
 PWM_PERIOD      EQU 100         ; Chu k? PWM
 PWM_DUTY        DATA 30H        ; Duty cycle (0-100)
 PWM_COUNTER     DATA 31H        ; B? d?m PWM
@@ -19,7 +19,7 @@ SETB P1.3
 CLR P1.4
 SETB P1.6
 
-; Kh?i t?o PWM - TH M M?I
+; Kh?i t?o PWM - TH√äM M?I
 MOV PWM_DUTY, #0
 MOV PWM_COUNTER, #0
 
@@ -157,7 +157,7 @@ MOV A,#01H
 ACALL COMMAND
 ACALL DELAY
 
-; ==== –?c d? li?u c?m bi?n ====
+; ==== √ê?c d? li?u c?m bi?n ====
 AGAIN1:
 SETB P3.5
 SETB P3.3
@@ -180,7 +180,7 @@ MOV A,R4
 LCALL CONVERSION
 LCALL LCDWRITETMP
 
-; Hi?n th? PWM - TH M M?I
+; Hi?n th? PWM - TH√äM M?I
 MOV A,#0C0H
 ACALL COMMAND
 ACALL DELAY
@@ -190,7 +190,7 @@ ACALL DELAY1
 
 LJMP AGAIN1
 
-; ==== So s·nh t?c d? v‡ di?u khi?n ====
+; ==== So s√°nh t?c d? v√† di?u khi?n ====
 COMPARE:
 CLR C
 CJNE R1,#20,CHECK_20
@@ -234,19 +234,18 @@ SETB P1.2
 SETB P1.3
 CLR P1.4
 SETB P1.6
-CLR TR0
-MOV IE, #00H 
+
 MOV A,#01H
 ACALL COMMAND
-
 RET
+
 
 COMP_DONE:
 CLR P1.4
 SETB P1.6
 RET
 
-; ==== C·c m?c di?u khi?n ====
+; ==== C√°c m?c di?u khi?n ====
 SPEED1: CLR TR0
 MOV R2,#0AAH
 MOV TH0,#60H
@@ -255,7 +254,7 @@ CLR P1.0
 SETB P1.1
 SETB P1.2
 SETB P1.3
-MOV PWM_DUTY, #20        ; TH M PWM 20%
+MOV PWM_DUTY, #20        ; TH√äM PWM 20%
 RET
 
 SPEED2: CLR TR0
@@ -266,7 +265,7 @@ SETB P1.0
 CLR P1.1
 SETB P1.2
 SETB P1.3
-MOV PWM_DUTY, #40        ; TH M PWM 40%
+MOV PWM_DUTY, #40        ; TH√äM PWM 40%
 RET
 
 SPEED3: CLR TR0
@@ -277,7 +276,7 @@ SETB P1.0
 SETB P1.1
 CLR P1.2
 SETB P1.3
-MOV PWM_DUTY, #60        ; TH M PWM 60%
+MOV PWM_DUTY, #60        ; TH√äM PWM 60%
 RET
 
 SPEED4: CLR TR0
@@ -288,7 +287,7 @@ SETB P1.0
 SETB P1.1
 SETB P1.2
 CLR P1.3
-MOV PWM_DUTY, #80        ; TH M PWM 80%
+MOV PWM_DUTY, #80        ; TH√äM PWM 80%
 RET
 
 SPEED5: CLR TR0
@@ -299,7 +298,7 @@ SETB P1.0
 SETB P1.1
 SETB P1.2
 SETB P1.3
-MOV PWM_DUTY, #100       ; TH M PWM 100%
+MOV PWM_DUTY, #100       ; TH√äM PWM 100%
 RET
 
 ; ==== Hi?n th? nhi?t d? ====
@@ -328,7 +327,7 @@ MOV A,#'C'
 ACALL LCDWRITE
 RET
 
-; ==== Hi?n th? PWM - TH M M?I ====
+; ==== Hi?n th? PWM - TH√äM M?I ====
 DISPLAY_PWM:
 MOV A,#'P'
 ACALL LCDWRITE
@@ -342,7 +341,7 @@ ACALL LCDWRITE
 ; Chuy?n PWM duty sang ASCII
 MOV A, PWM_DUTY
 
-; Ki?m tra n?u < 100 thÏ ch? hi?n th? 2 s?
+; Ki?m tra n?u < 100 th√¨ ch? hi?n th? 2 s?
 CJNE A, #100, TWO_DIGIT
 ; Tru?ng h?p 100%
 MOV A,#'1'
@@ -357,15 +356,15 @@ TWO_DIGIT:
 MOV A, PWM_DUTY
 MOV B,#10
 DIV AB
-MOV R2,B           ; H‡ng don v?  
-MOV R3,A           ; H‡ng ch?c
+MOV R2,B           ; H√†ng don v?  
+MOV R3,A           ; H√†ng ch?c
 
-; Hi?n th? h‡ng ch?c
+; Hi?n th? h√†ng ch?c
 MOV A,R3
 ADD A,#30H
 ACALL LCDWRITE
 
-; Hi?n th? h‡ng don v?
+; Hi?n th? h√†ng don v?
 MOV A,R2
 ADD A,#30H
 ACALL LCDWRITE
@@ -375,7 +374,7 @@ MOV A,#'%'
 ACALL LCDWRITE
 RET
 
-; ==== Chuy?n d?i sang k˝ t? ASCII ====
+; ==== Chuy?n d?i sang k√Ω t? ASCII ====
 CONVERSION:
 MOV B,#10
 DIV AB
@@ -391,7 +390,7 @@ ADD A,#30H
 MOV R7,A
 RET
 
-; ==== C?nh b·o ====
+; ==== C?nh b√°o ====
 WARNING_DISPLAY:
 MOV A,#' '
 ACALL LCDWRITE
@@ -413,7 +412,7 @@ MOV A,#'!'
 ACALL LCDWRITE
 RET
 
-; ==== Ng?t Timer0 - S?A –?I TH¿NH PWM ====
+; ==== Ng?t Timer0 - S?A √ê?I TH√ÄNH PWM ====
 INTERRUPT:
 PUSH ACC
 PUSH PSW
@@ -436,7 +435,7 @@ SET_HIGH:
 SETB P1.5             ; PWM HIGH
 
 PWM_DONE:
-; Gi? nguyÍn timer reload
+; Gi? nguy√™n timer reload
 MOV TH0, #HIGH(-50000)
 MOV TL0, #LOW(-50000)
 DJNZ R2, SKIP
